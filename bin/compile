@@ -61,7 +61,7 @@ cp $LP_DIR/conf/htpasswd $APACHE_PATH/auth
 
 # make php available on bin
 mkdir -p bin
-ln -s /app/php/bin/php bin/php
+ln -fs /app/php/bin/php bin/php
 
 cat >>boot.sh <<EOF
 for var in \`env|cut -f1 -d=\`; do
