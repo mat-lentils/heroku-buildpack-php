@@ -58,10 +58,10 @@ curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
 
-mkdir -p $APACHE_PATH/auth
+mkdir -p /app/auth
 
-cp $LP_DIR/conf/htgroup $APACHE_PATH/auth
-cp $LP_DIR/conf/htpasswd $APACHE_PATH/auth
+cp $LP_DIR/conf/htgroup /app/auth
+cp $LP_DIR/conf/htpasswd /app/auth
 
 # make php available on bin
 mkdir -p bin
