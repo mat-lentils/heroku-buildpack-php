@@ -54,7 +54,7 @@ curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 LIBMYSQL_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
 echo "-----> Bundling libmysql"
 curl --silent --max-time 60 --location "$LIBMYSQL_URL" | tar xz
-mv libmysqlclient* /app/apache/modules/
+mv libmysqlclient* /app/lib/php/
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
