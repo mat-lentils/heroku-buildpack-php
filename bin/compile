@@ -51,9 +51,10 @@ PHP_URL="http://chh-heroku-buildpack-php.s3.amazonaws.com/package/php-""$PHP_VER
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
-#LIBMYSQL_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
-#echo "-----> Bundling libmysql"
-#curl --silent --max-time 60 --location "$LIBMYSQL_URL" | tar xz
+LIBMYSQL_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
+echo "-----> Bundling libmysql"
+curl --silent --max-time 60 --location "$LIBMYSQL_URL" | tar xz
+mv libmysqlclient* /app/apache/modules/
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
