@@ -15,7 +15,7 @@ heroku_rev='-2'
 MCRYPT_VERSION="2.5.8"
 APACHE_VERSION="2.2.25"
 APACHE_PATH="apache"
-PHP_VERSION="5.3.28"
+PHP_VERSION="5.3.27"
 PHP_PATH="php"
 
 BIN_DIR=$(dirname $0)
@@ -46,15 +46,9 @@ APACHE_URL="https://heroku-buildpack-php.s3.amazonaws.com/apache-""$APACHE_VERSI
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
-#PHP_URL="https://heroku-buildpack-php.s3.amazonaws.com/php-""$PHP_VERSION""$heroku_rev"".tar.gz"
-PHP_URL="http://chh-heroku-buildpack-php.s3.amazonaws.com/package/php-""$PHP_VERSION"".tgz"
+PHP_URL="https://heroku-buildpack-php.s3.amazonaws.com/php-""$PHP_VERSION""$heroku_rev"".tar.gz"
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
-
-LIBMYSQL_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
-echo "-----> Bundling libmysql"
-curl --silent --max-time 60 --location "$LIBMYSQL_URL" | tar xz
-mv libmysqlclient* /app/lib/php/
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
