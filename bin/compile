@@ -42,6 +42,12 @@ MCRYPT_URL="https://heroku-buildpack-php.s3.amazonaws.com/mcrypt-""$MCRYPT_VERSI
 echo "-----> Bundling mcrypt version $MCRYPT_VERSION"
 curl --silent --max-time 60 --location "$MCRYPT_URL" | tar xz
 
+LIBMYSQLCLIENT_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
+echo "-----> Bundling libmysqlclient shared objects"
+curl --silent --max-time 60 --location "$LIBMYSQLCLIENT_URL" | tar xz
+mv libmysqlclient* /app/php/lib/php
+chmod 0755 /app/php/lib/php/libmysqlclient*
+
 APACHE_URL="https://heroku-buildpack-php.s3.amazonaws.com/apache-""$APACHE_VERSION""$heroku_rev"".tar.gz"
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
@@ -54,6 +60,7 @@ PHPEXT_URL="https://www.overclockers.at/downloads/php-ext.tar.gz"
 echo "-----> Bundling PHP extensions"
 curl --silent --max-time 60 --location "$PHPEXT_URL" | tar xz
 mv *.so /app/php/lib/php/extensions/no-debug-non-zts-20090626
+chmod 0755 /app/php/lib/php/extensions/no-debug-non-zts-20090626/*.so
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
