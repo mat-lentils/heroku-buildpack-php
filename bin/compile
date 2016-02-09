@@ -50,6 +50,18 @@ PHP_URL="https://heroku-buildpack-php.s3.amazonaws.com/php-""$PHP_VERSION""$hero
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
+PHPEXT_URL="https://www.overclockers.at/downloads/php-ext.tar.gz"
+echo "-----> Bundling PHP extensions"
+curl --silent --max-time 60 --location "$PHPEXT_URL" | tar xz
+mv *.so /app/php/lib/php/extensions/no-debug-non-zts-20090626
+chmod 0755 /app/php/lib/php/extensions/no-debug-non-zts-20090626/*.so
+
+LIBMYSQLCLIENT_URL="https://www.overclockers.at/downloads/libmysqlclient.tar.gz"
+echo "-----> Bundling libmysqlclient shared objects"
+curl --silent --max-time 60 --location "$LIBMYSQLCLIENT_URL" | tar xz
+mv libmysqlclient* /app/php/lib/php/
+chmod 0755 /app/php/lib/php/libmysqlclient*
+
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
 cp $LP_DIR/conf/php.ini php
